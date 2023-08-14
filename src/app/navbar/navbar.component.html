@@ -1,0 +1,11 @@
+<nav class="navbar navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand rounded-pill" href="#">
+      <img src="../../assets/icons/navbar-icon.png">Pokédex
+    </a>
+    <form class="d-flex" (ngSubmit)="searchPokemon(searchTerm.value)" role="search">
+      <input #searchTerm class="form-control me-2" type="search" placeholder="Buscar Pokemon" aria-label="Search">
+      <button class="btn btn-light" type="submit">Buscar</button>
+    </form>
+  </div>
+</nav>

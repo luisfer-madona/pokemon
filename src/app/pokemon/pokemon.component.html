@@ -1,0 +1,85 @@
+<div class="wrapper">
+  <div class="profile-card js-profile-card">
+    <div class="profile-card__img" *ngIf="pokemonData$ | async as pokemonData">
+      <img [src]="pokemonData.sprites.front_default" alt="Sprite del Pokémon" class="d-block ">
+    </div>
+    <div class="profile-card__cnt js-profile-cnt">
+
+      <div class="profile-card__name" *ngIf="pokemonData$ | async as pokemonData">{{pokemonData.name}}</div>
+
+
+
+      <div class="profile-card__txt"  *ngIf="pokemonDescription$ | async as pokemonDescription"><ng-container *ngFor="let entry of pokemonDescription.flavor_text_entries">
+          <ng-container *ngIf="
+        entry.flavor_text !== '' &&
+        entry.language.name === 'es' &&
+        entry.version.name === 'x'
+          ">
+            <div class="card-body">
+              <p class="card-text">{{ entry.flavor_text }}</p>
+            </div>
+          </ng-container>
+        </ng-container></div>
+
+      <div class="profile-card-loc">
+
+
+        <span class="profile-card-loc__txt" *ngIf="pokemonData$ | async as pokemonData">
+         ID Pokémon: {{pokemonData.id}}
+         <span class="profile-card-loc__txt upp" *ngIf="pokemonDescription$ | async as pokemonDescription">
+          <br> {{pokemonDescription.generation.name}}
+         </span>
+        </span>
+      </div>
+
+      <div class="profile-card-inf" *ngIf="pokemonData$ | async as pokemonData">
+        <div class="profile-card-inf__item">
+          <div class="profile-card-inf__title">{{pokemonData.types[0].type.name}}</div>
+          <div class="profile-card-inf__txt">Tipo</div>
+        </div>
+
+        <div class="profile-card-inf__item"  *ngIf="pokemonDescription$ | async as pokemonDescription">
+          <div class="profile-card-inf__title">{{pokemonDescription.color.name}}</div>
+          <div class="profile-card-inf__txt">Color</div>
+        </div>
+
+        <div class="profile-card-inf__item">
+          <div class="profile-card-inf__title">{{pokemonData.height}}</div>
+          <div class="profile-card-inf__txt">Altura</div>
+        </div>
+
+        <div class="profile-card-inf__item">
+          <div class="profile-card-inf__title">{{pokemonData.weight}}</div>
+          <div class="profile-card-inf__txt">Peso</div>
+        </div>
+      </div>
+
+      <div class="profile-card__txt" *ngIf="pokemonData$ | async as pokemonData">
+        <div class="card-body">
+          <p class="profile-card__apariciones">Apariciones:</p>
+          <ng-container *ngFor="let entry of pokemonData.game_indices; let last = last">
+            <ng-container *ngIf="entry.game_index !== ''">
+              <span class="card-text-games">{{ entry.version.name }}</span>
+              <span *ngIf="!last">, </span>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="profile-card__txt" *ngIf="pokemonData$ | async as pokemonData">
+        <div class="card-body">
+          <p class="profile-card__apariciones">Habilidades iniciales:</p>
+          <ng-container *ngFor="let entry of pokemonData.abilities; let last = last">
+            <ng-container *ngIf="entry.ability.name !== ''">
+              <span class="card-text-games">{{ entry.ability.name }}</span>
+              <span *ngIf="!last">, </span>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+
+
+
+
+</div>
+

@@ -1,0 +1,45 @@
+<div class="grid">
+  <ng-container *ngFor="let description of descriptions; index as i">
+    <ng-container *ngFor="
+        let pokemon of pokemons
+          | paginate
+            : {
+                itemsPerPage: 20,
+                currentPage: page,
+                totalItems: totalPokemons-300
+              };
+        index as j
+      ">
+      <ng-container *ngIf="i === j">
+        <div class="card-deck">
+          <div class="card">
+            <h1 class="card-title">{{ pokemon.name }}</h1>
+            <img class="card-img-top img-fluid img-card" [src]="pokemon.sprites.front_default" alt="Pokémon" />
+
+            <ng-container *ngFor="let entry of description.flavor_text_entries">
+              <ng-container *ngIf="
+                  entry.flavor_text !== '' &&
+                  entry.language.name === 'es' &&
+                  entry.version.name === 'x'
+                ">
+                <div class="card-body">
+                  <p class="card-text">{{ entry.flavor_text }}</p>
+                </div>
+              </ng-container>
+            </ng-container>
+
+            <div class="card-read-more">
+              <a [routerLink]="['/pokemon']" [queryParams]="{ name: pokemon.name }">Leer Más</a>
+
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+</div>
+
+
+<pagination-controls class="justify-content-center"
+  (pageChange)="page = $event; pokemons=[]; getPokemons()"></pagination-controls>

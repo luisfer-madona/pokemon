@@ -1,0 +1,15 @@
+.navbar-brand{
+  font-family: Pokemon-Solid;
+  font-size: 3rem;
+  letter-spacing: 10px;
+  color: gold;
+  outline-style: solid;
+  outline-color: black;
+  -webkit-text-stroke: 1px black;
+  font-weight: 700;
+  box-shadow:  15px 55px 30px inset red, -15px -50px 30px inset rgb(244, 244, 244);
+}
+
+img{
+  border-radius: 50%;
+}
